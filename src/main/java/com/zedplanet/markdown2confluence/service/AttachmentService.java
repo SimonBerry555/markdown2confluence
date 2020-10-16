@@ -1,6 +1,6 @@
-package com.zedplanet.markdown2confluence.core.service;
+package com.zedplanet.markdown2confluence.service;
 
-import com.zedplanet.markdown2confluence.core.ConfluenceException;
+import com.zedplanet.markdown2confluence.ConfluenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.zedplanet.markdown2confluence.core.model;
+package com.zedplanet.markdown2confluence.model;
 
 import lombok.Data;
 

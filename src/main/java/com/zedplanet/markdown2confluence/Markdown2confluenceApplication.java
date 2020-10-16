@@ -2,8 +2,7 @@ package com.zedplanet.markdown2confluence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig;
-import com.zedplanet.markdown2confluence.core.service.MainService;
+import com.zedplanet.markdown2confluence.service.MainService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;

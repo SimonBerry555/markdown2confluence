@@ -1,6 +1,6 @@
-package com.zedplanet.markdown2confluence.core.service;
+package com.zedplanet.markdown2confluence.service;
 
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig;
+import com.zedplanet.markdown2confluence.ConfluenceConfig;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

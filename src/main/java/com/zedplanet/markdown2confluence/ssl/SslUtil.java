@@ -1,4 +1,4 @@
-package com.zedplanet.markdown2confluence.core.ssl;
+package com.zedplanet.markdown2confluence.ssl;
 
 import javax.net.ssl.*;
 import java.security.KeyManagementException;

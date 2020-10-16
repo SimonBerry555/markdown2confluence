@@ -1,4 +1,4 @@
-package com.zedplanet.markdown2confluence.core;
+package com.zedplanet.markdown2confluence;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

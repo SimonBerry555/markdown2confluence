@@ -1,11 +1,11 @@
-package com.zedplanet.markdown2confluence.core.service;
+package com.zedplanet.markdown2confluence.service;
 
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig;
-import com.zedplanet.markdown2confluence.core.ConfluenceException;
-import com.zedplanet.markdown2confluence.core.model.Ancestor;
-import com.zedplanet.markdown2confluence.core.model.Body;
-import com.zedplanet.markdown2confluence.core.model.Result;
-import com.zedplanet.markdown2confluence.core.model.Storage;
+import com.zedplanet.markdown2confluence.ConfluenceConfig;
+import com.zedplanet.markdown2confluence.ConfluenceException;
+import com.zedplanet.markdown2confluence.model.Ancestor;
+import com.zedplanet.markdown2confluence.model.Body;
+import com.zedplanet.markdown2confluence.model.Result;
+import com.zedplanet.markdown2confluence.model.Storage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

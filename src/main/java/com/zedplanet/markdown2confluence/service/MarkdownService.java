@@ -1,4 +1,4 @@
-package com.zedplanet.markdown2confluence.core.service;
+package com.zedplanet.markdown2confluence.service;
 
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;

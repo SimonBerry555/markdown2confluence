@@ -1,7 +1,7 @@
-package com.zedplanet.markdown2confluence.core.service;
+package com.zedplanet.markdown2confluence.service;
 
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig;
-import com.zedplanet.markdown2confluence.core.model.*;
+import com.zedplanet.markdown2confluence.ConfluenceConfig;
+import com.zedplanet.markdown2confluence.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -21,7 +21,6 @@ import java.util.Optional;
 public class ConfluenceService {
 
   private static final String EXPAND = "expand";
-  private static final String ID = "id";
   private static final String SPACE_KEY = "spaceKey";
   private static final String TITLE = "title";
 
@@ -39,8 +38,8 @@ public class ConfluenceService {
   private static HttpHeaders buildHttpHeaders(final String confluenceAuthentication) {
     final HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", String.format("Basic %s", confluenceAuthentication));
-    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));
-    headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+    headers.setContentType(MediaType.APPLICATION_JSON);
 
     return headers;
   }
@@ -48,7 +47,7 @@ public class ConfluenceService {
   private static HttpHeaders buildHttpHeadersForAttachment(final String confluenceAuthentication) {
     final HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", String.format("Basic %s", confluenceAuthentication));
-    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));
+    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);
     headers.set("X-Atlassian-Token", "no-check");
 

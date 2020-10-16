@@ -1,7 +1,7 @@
-package com.zedplanet.markdown2confluence.core.service;
+package com.zedplanet.markdown2confluence.service;
 
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig;
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig.Page;
+import com.zedplanet.markdown2confluence.ConfluenceConfig;
+import com.zedplanet.markdown2confluence.ConfluenceConfig.Page;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zedplanet.markdown2confluence.core;
+package com.zedplanet.markdown2confluence;
 
 public class ConfluenceException extends RuntimeException {
 
