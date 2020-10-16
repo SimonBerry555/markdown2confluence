@@ -1,65 +1,15 @@
 package com.zedplanet.markdown2confluence.core.model;
 
+import lombok.Data;
+
 import java.util.Collection;
 
-/**
- * Created by Anton Reshetnikov on 15 Nov 2016.
- */
+@Data
 public class ConfluencePage {
-
-    private Long ancestorId;
-    private String title;
-    private Long id;
-    private Integer version;
-    private String content;
-    private Collection<String> labels;
-
-    public Long getAncestorId() {
-        return ancestorId;
-    }
-
-    public void setAncestorId(Long ancestorId) {
-        this.ancestorId = ancestorId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Collection<String> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(Collection<String> labels) {
-        this.labels = labels;
-    }
+  private Long ancestorId;
+  private String title;
+  private Long id;
+  private Integer version;
+  private String content;
+  private Collection<String> labels;
 }

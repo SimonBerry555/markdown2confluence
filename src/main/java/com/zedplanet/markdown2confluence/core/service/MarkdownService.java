@@ -1,42 +1,32 @@
 package com.zedplanet.markdown2confluence.core.service;
 
-import com.zedplanet.markdown2confluence.core.ConfluenceConfig;
-import com.zedplanet.markdown2confluence.core.service.markdown.WikiConfluenceSerializer;
-import org.pegdown.PegDownProcessor;
-import org.pegdown.ast.Node;
-import org.pegdown.ast.RootNode;
+import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Anton Reshetnikov on 15 Nov 2016.
- */
+import java.util.Arrays;
+
 @Service
 public class MarkdownService {
 
-    private PegDownProcessor pegDownProcessor = new PegDownProcessor(WikiConfluenceSerializer.extensions());
+  public String convertMarkdown2HTML(final String markdown) {
 
-    MarkdownService() {
-    }
+    MutableDataSet options = new MutableDataSet();
 
-    MarkdownService(long parseTimeOut) {
-        this.pegDownProcessor = new PegDownProcessor(WikiConfluenceSerializer.extensions(), parseTimeOut);
-    }
+    // uncomment to set optional extensions
+    options.set(
+        Parser.EXTENSIONS,
+        Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()));
 
-    public String convertMarkdown2Wiki(final String s, ConfluenceConfig confluenceConfig) {
-        final RootNode root = pegDownProcessor.parseMarkdown(s.toCharArray());
-        WikiConfluenceSerializer ser =  new WikiConfluenceSerializer(confluenceConfig.getPageVariables()) {
-            @Override
-            protected void notImplementedYet(Node node) {
-                final int lc[] = WikiConfluenceSerializer.lineAndColFromNode( s, node);
-                throw new UnsupportedOperationException( String.format("Node [%s] not supported yet. line=[%d] col=[%d]",
-                        node.getClass().getSimpleName(),
-                        lc[0],
-                        lc[1] ));
-            }
-        };
+    // uncomment to convert soft-breaks to hard breaks
+    // options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
 
-        root.accept(ser);
+    Parser parser = Parser.builder(options).build();
+    HtmlRenderer renderer = HtmlRenderer.builder(options).build();
 
-        return ser.toString();
-    }
+    return renderer.render(parser.parse(markdown));
+  }
 }

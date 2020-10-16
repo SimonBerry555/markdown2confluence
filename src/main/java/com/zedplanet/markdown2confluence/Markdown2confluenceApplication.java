@@ -25,17 +25,7 @@ public class Markdown2confluenceApplication implements CommandLineRunner {
     SpringApplication.run(Markdown2confluenceApplication.class, args).close();
   }
 
-  @Override
-  public void run(String... args) throws Exception {
-
-    System.out.println("Running");
-
-    mainService.processAll(getConfluenceConfig());
-
-    System.out.println("Done");
-  }
-
-  static ConfluenceConfig getConfluenceConfig() throws IOException {
+  public static ConfluenceConfig getConfluenceConfig() throws IOException {
 
     if (System.getenv("CONFLUENCE_USER") == null) {
       throw new IllegalArgumentException("CONFLUENCE_USER is not defined in the environment.");
@@ -58,5 +48,15 @@ public class Markdown2confluenceApplication implements CommandLineRunner {
     confluenceConfig.setAuthentication(new String(bytesEncoded));
 
     return confluenceConfig;
+  }
+
+  @Override
+  public void run(String... args) throws Exception {
+
+    System.out.println("Running");
+
+    mainService.processAll(getConfluenceConfig());
+
+    System.out.println("Done");
   }
 }

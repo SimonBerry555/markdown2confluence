@@ -17,13 +17,11 @@ package com.zedplanet.markdown2confluence.core;
 
 public class ConfluenceException extends RuntimeException {
 
-    public ConfluenceException(String message) {
-        super(message);
-    }
+  public ConfluenceException(String message) {
+    super(message);
+  }
 
-    public ConfluenceException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
+  public ConfluenceException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }
-
