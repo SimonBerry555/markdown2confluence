@@ -11,10 +11,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageCreate {
-  private String type;
-  private String title;
-  private Space space;
-  private Body body;
+public class Result {
   private List<Ancestor> ancestors;
+  private Body body;
+  private String id;
+  private String status;
+  private String title;
+  private String type;
+  private Version version;
 }

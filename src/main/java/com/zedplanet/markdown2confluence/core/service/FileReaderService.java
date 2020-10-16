@@ -9,7 +9,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/** Created by Anton Reshetnikov on 15 Nov 2016. */
 @Service
 public class FileReaderService {
 

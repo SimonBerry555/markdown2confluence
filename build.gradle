@@ -30,7 +30,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
-    implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+    //implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.3'
 
 // https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark

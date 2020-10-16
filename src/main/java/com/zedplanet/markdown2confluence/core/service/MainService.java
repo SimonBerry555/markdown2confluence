@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.parser.Tag;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -105,9 +104,7 @@ public class MainService {
     doc.select("img")
         .forEach(
             img -> {
-              System.out.println(img);
               Attributes attributes = img.attributes();
-              Elements children = img.children();
               if (!attributes.get("src").startsWith("http")) {
                 new Element(Tag.valueOf("ac:image"), "");
                 imageFilePaths.add(Path.of(attributes.get("src")));

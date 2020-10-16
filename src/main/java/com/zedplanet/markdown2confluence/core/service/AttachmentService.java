@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 @Service
 public class AttachmentService {
@@ -24,14 +25,15 @@ public class AttachmentService {
     LOG.info("Posting attachment {} to page {} in Confluence...", filePath.toString(), pageId);
 
     try {
-      String attachmentId =
+      Optional<String> attachmentId =
           confluenceService.getAttachmentId(pageId, filePath.getFileName().toString());
-      if (attachmentId == null) {
+
+      if (attachmentId.isPresent()) {
+        LOG.info("Update existing attachment");
+        confluenceService.updateAttachment(pageId, attachmentId.get(), filePath.toString());
+      } else {
         LOG.info("Create new attachment");
         confluenceService.createAttachment(pageId, filePath.toString());
-      } else {
-        LOG.info("Update existing attachment");
-        confluenceService.updateAttachment(pageId, attachmentId, filePath.toString());
       }
     } catch (HttpStatusCodeException e) {
       LOG.error("Error creating/updating attachment.", e);
