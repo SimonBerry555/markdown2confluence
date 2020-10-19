@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.zedplanet'
-version = '0.0.1'
+version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -30,10 +30,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
-    //implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.3'
-
-// https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark
     compile group: 'com.vladsch.flexmark', name: 'flexmark-all', version: '0.62.2'
 
 }
