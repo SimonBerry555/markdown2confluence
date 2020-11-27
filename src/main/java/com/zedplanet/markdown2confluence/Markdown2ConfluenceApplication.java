@@ -16,12 +16,12 @@ import java.nio.file.Paths;
 
 @Slf4j
 @SpringBootApplication
-public class Markdown2confluenceApplication implements CommandLineRunner {
+public class Markdown2ConfluenceApplication implements CommandLineRunner {
 
   @Autowired MainService mainService;
 
   public static void main(String[] args) {
-    SpringApplication.run(Markdown2confluenceApplication.class, args).close();
+    SpringApplication.run(Markdown2ConfluenceApplication.class, args).close();
   }
 
   public static ConfluenceConfig getConfluenceConfig() throws IOException {

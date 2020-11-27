@@ -1,4 +1,4 @@
-package com.zedplanet.markdown2confluence.service;
+package com.zedplanet.markdown2confluence.service.confluence;
 
 import com.zedplanet.markdown2confluence.ConfluenceConfig;
 import com.zedplanet.markdown2confluence.ConfluenceException;
@@ -52,9 +52,7 @@ public class PageService {
                         .build())
                 .build();
 
-        String pageId = confluenceService.createPage(newPage);
-
-        return pageId;
+        return confluenceService.createPage(newPage);
       }
     } catch (HttpStatusCodeException e) {
       throw new ConfluenceException(e.getResponseBodyAsString(), e);

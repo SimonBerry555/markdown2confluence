@@ -1,4 +1,4 @@
-package com.zedplanet.markdown2confluence.service;
+package com.zedplanet.markdown2confluence.service.confluence;
 
 import com.zedplanet.markdown2confluence.ConfluenceException;
 import org.slf4j.Logger;

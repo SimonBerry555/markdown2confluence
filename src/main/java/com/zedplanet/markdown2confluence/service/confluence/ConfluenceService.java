@@ -1,9 +1,8 @@
-package com.zedplanet.markdown2confluence.service;
+package com.zedplanet.markdown2confluence.service.confluence;
 
 import com.zedplanet.markdown2confluence.ConfluenceConfig;
 import com.zedplanet.markdown2confluence.model.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,6 @@ public class ConfluenceService {
   private HttpHeaders httpHeaders;
   private HttpHeaders httpHeadersForAttachment;
 
-  @Autowired
   public ConfluenceService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
@@ -77,9 +75,13 @@ public class ConfluenceService {
     final ResponseEntity<ConfluenceResponse> responseEntity =
         restTemplate.exchange(targetUrl, HttpMethod.GET, requestEntity, ConfluenceResponse.class);
 
-    return responseEntity.getBody().getResults().stream()
-        .filter(result -> result.getTitle().equals(title))
-        .findAny();
+    try {
+      return responseEntity.getBody().getResults().stream()
+              .filter(result -> result.getTitle().equals(title))
+              .findAny();
+    } catch (NullPointerException npe) {
+      return Optional.empty();
+    }
   }
 
   public String findSpaceHomePageId() {
@@ -98,7 +100,11 @@ public class ConfluenceService {
     final ResponseEntity<ConfluenceResponse> responseEntity =
         restTemplate.exchange(targetUrl, HttpMethod.GET, requestEntity, ConfluenceResponse.class);
 
-    return responseEntity.getBody().getResults().stream().filter(result -> result.getAncestors().isEmpty()).map(Result::getId).findFirst().orElse(null);
+    try {
+      return responseEntity.getBody().getResults().stream().filter(result -> result.getAncestors().isEmpty()).map(Result::getId).findFirst().orElse(null);
+    } catch (NullPointerException npe) {
+      return null;
+    }
   }
 
   public void updatePage(final Result page) {
@@ -109,7 +115,7 @@ public class ConfluenceService {
             .build()
             .toUri();
 
-    Page page1 =
+    Page updatedPage =
         Page.builder()
             .type("page")
             .id(page.getId())
@@ -120,7 +126,7 @@ public class ConfluenceService {
             .version(Version.builder().number(page.getVersion().getNumber() + 1).build())
             .build();
 
-    final HttpEntity<Page> requestEntity = new HttpEntity<Page>(page1, httpHeaders);
+    final HttpEntity<Page> requestEntity = new HttpEntity<>(updatedPage, httpHeaders);
 
     final HttpEntity<Page> responseEntity =
         restTemplate.exchange(targetUrl, HttpMethod.PUT, requestEntity, Page.class);
@@ -135,7 +141,7 @@ public class ConfluenceService {
             .build()
             .toUri();
 
-    Page page1 =
+    Page newPage =
         Page.builder()
             .type("page")
             .title(page.getTitle())
@@ -144,14 +150,18 @@ public class ConfluenceService {
             .ancestors(page.getAncestors())
             .build();
 
-    final HttpEntity<Page> requestEntity = new HttpEntity<>(page1, httpHeaders);
+    final HttpEntity<Page> requestEntity = new HttpEntity<>(newPage, httpHeaders);
 
     final HttpEntity<Page> responseEntity =
         restTemplate.exchange(targetUrl, HttpMethod.POST, requestEntity, Page.class);
 
     log.debug("Response of creating page: {}", responseEntity.getBody());
 
-    return responseEntity.getBody().getId();
+    try {
+      return responseEntity.getBody().getId();
+    } catch (NullPointerException npe) {
+      return null;
+    }
   }
 
   public String findAncestorId(String title) {
@@ -183,9 +193,13 @@ public class ConfluenceService {
 
     log.debug("Response of creating attachment: {}", responseEntity.getBody());
 
-    return responseEntity.getBody().getResults().stream()
-            .filter(result -> result.getTitle().equals(attachmentFilename)).map(Result::getId)
-            .findAny();
+    try {
+      return responseEntity.getBody().getResults().stream()
+              .filter(result -> result.getTitle().equals(attachmentFilename)).map(Result::getId)
+              .findAny();
+    } catch (NullPointerException npe) {
+      return Optional.empty();
+    }
   }
 
   public void createAttachment(String pageId, String filePath) {

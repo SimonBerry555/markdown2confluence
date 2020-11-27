@@ -2,37 +2,35 @@ package com.zedplanet.markdown2confluence.service;
 
 import com.zedplanet.markdown2confluence.ConfluenceConfig;
 import com.zedplanet.markdown2confluence.ConfluenceConfig.Page;
+import com.zedplanet.markdown2confluence.service.confluence.AttachmentService;
+import com.zedplanet.markdown2confluence.service.confluence.ConfluenceService;
+import com.zedplanet.markdown2confluence.service.confluence.PageService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.parser.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 
+import static com.zedplanet.markdown2confluence.service.Utilities.convertMarkdown2HTML;
+import static com.zedplanet.markdown2confluence.service.Utilities.readFile;
+
 @Service
 public class MainService {
 
-  private final FileReaderService fileReaderService;
   private final PageService pageService;
   private final AttachmentService attachmentService;
   private final ConfluenceService confluenceService;
-  private MarkdownService markdownService;
 
-  @Autowired
   public MainService(
-      FileReaderService fileReaderService,
-      MarkdownService markdownService,
       PageService pageService,
       AttachmentService attachmentService,
       ConfluenceService confluenceService) {
-    this.fileReaderService = fileReaderService;
-    this.markdownService = markdownService;
     this.pageService = pageService;
     this.attachmentService = attachmentService;
     this.confluenceService = confluenceService;
@@ -75,8 +73,8 @@ public class MainService {
 
     List<Page> orderedList = order(confluenceConfig.getPages());
     for (Page page : orderedList) {
-      String markdownText = fileReaderService.readFile(page);
-      String html = markdownService.convertMarkdown2HTML(markdownText);
+      String markdownText = readFile(page);
+      String html = convertMarkdown2HTML(markdownText);
 
       // Holds the path to the file
       ArrayList<Path> imageFilePaths = new ArrayList<>();
