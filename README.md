@@ -43,7 +43,7 @@ You need a file called _md2confluence.yaml_ with contents similar to below:
 1. Set your environment
 
     ```shell script
-    export CONFLUENCE_USER=you@compant.com
+    export CONFLUENCE_USER=you@yourcompany.com
     export CONFLUENCE_API_KEY=your_api_token
     ```
 
